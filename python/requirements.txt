@@ -1,0 +1,15 @@
+mypy
+autopep8
+black
+scipy
+numpy
+data-science-types
+scikit-image
+requests
+czifile
+sprunge.py
+pyright
+numba
+imagecodecs>=2022.8.8
+tifffile>=2022.8.12
+torch
