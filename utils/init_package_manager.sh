@@ -1,3 +1,5 @@
+#! /bin/bash
+
 apt=apt
 install=install
 update=update
