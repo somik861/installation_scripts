@@ -13,3 +13,5 @@ numba
 imagecodecs>=2022.8.8
 tifffile>=2022.8.12
 torch
+torchvision 
+torchaudio
