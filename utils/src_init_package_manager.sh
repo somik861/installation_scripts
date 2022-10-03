@@ -1,6 +1,6 @@
 #! /bin/bash
 
-source ../common.sh
+source ../src_common.sh
 
 if nala --version > /dev/null 2>&1; then
     APT="sudo nala"
@@ -14,7 +14,7 @@ if nala --version > /dev/null 2>&1; then
     UPGRADE="upgrade -y"
     elif pacman --version > /dev/null 2>&1; then
     APT="sudo pacman"
-    INSTALL="-Su"
+    INSTALL="-Su --needed"
     UPDATE="-Syy"
     UPGRADE="-Syu"
 else

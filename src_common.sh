@@ -63,8 +63,3 @@ __wget()
     fi
 }
 
-
-# Set script to abort on any command that results an error status
-trap '__abort' 0
-set -e
-
