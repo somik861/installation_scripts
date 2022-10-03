@@ -1,14 +1,14 @@
 #!/bin/bash
 
 source ../common.sh
-source ../utils/init_pacakge_manager.sh
+source ../utils/init_package_manager.sh
 
 $APT $UPDATE
 $APT $UPGRADE
 
 if [ "$APT" == "sudo apt" ]; then
     ${APT} ${INSTALL} nala
-    source ../utils/init_pacakge_manager.sh
+    source ../utils/init_package_manager.sh
 fi
 
 UBUNTU_PKG="g++ clang-format tar untar zip unzip curl"
