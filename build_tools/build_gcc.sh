@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Instructions for building gcc 8.x from source.
 
@@ -11,9 +11,9 @@
 #======================================================================
 
 # Provide the version of gcc being built (e.g. 9.1.0)
-if [ $# -ne 1 -a $# -ne 2 ]; then
+if [ $# -ne 1 ] && [ $# -ne 2 ]; then
     echo "./PROGRAM VERSION [LANGUAGES( 'c,c++,fortran,...' )]"
-    exit 1 
+    exit 1
 fi
 
 if [ $# -eq 1 ]; then
@@ -42,10 +42,11 @@ build_target=x86_64-linux-gnu
 #
 # WARNING: do not make 'source_dir' and 'build_dir' the same, or
 # subdirectory of each other! It will cause build problems.
+tmp_dir=${HOME}/tmp
 install_dir=${HOME}/Software/gcc-${gcc_version}
-build_dir=/tmp/$(whoami)/gcc-${gcc_version}_build
-source_dir=/tmp/$(whoami)/gcc-${gcc_version}_source
-tarfile_dir=/tmp/$(whoami)/gcc-${gcc_version}_tarballs
+build_dir=${tmp_dir}/gcc-${gcc_version}_build
+source_dir=${tmp_dir}/tmp/gcc-${gcc_version}_source
+tarfile_dir=${tmp_dir}/tmp/gcc-${gcc_version}_tarballs
 
 # String which gets embedded into gcc version info, can be accessed at
 # runtime. Use to indicate who/what/when has built this compiler.
@@ -76,71 +77,7 @@ isl_version=0.18
 # Support functions
 #======================================================================
 
-
-__die()
-{
-    echo $*
-    exit 1
-}
-
-
-__banner()
-{
-    echo "============================================================"
-    echo $*
-    echo "============================================================"
-}
-
-
-__untar()
-{
-    dir="$1";
-    file="$2"
-    case $file in
-        *xz)
-            tar xJ -C "$dir" -f "$file"
-            ;;
-        *bz2)
-            tar xj -C "$dir" -f "$file"
-            ;;
-        *gz)
-            tar xz -C "$dir" -f "$file"
-            ;;
-        *)
-            __die "don't know how to unzip $file"
-            ;;
-    esac
-}
-
-
-__abort()
-{
-        cat <<EOF
-***************
-*** ABORTED ***
-***************
-An error occurred. Exiting...
-EOF
-        exit 1
-}
-
-
-__wget()
-{
-    urlroot=$1; shift
-    tarfile=$1; shift
-
-    if [ ! -e "$tarfile_dir/$tarfile" ]; then
-        wget --verbose ${urlroot}/$tarfile --directory-prefix="$tarfile_dir"
-    else
-        echo "already downloaded: $tarfile  '$tarfile_dir/$tarfile'"
-    fi
-}
-
-
-# Set script to abort on any command that results an error status
-trap '__abort' 0
-set -e
+source ../common.sh
 
 
 #======================================================================
@@ -159,7 +96,7 @@ done
 
 for d in "$install_dir" "$build_dir" "$source_dir" "$tarfile_dir" ;
 do
-    test  -d "$d" || mkdir --verbose -p $d
+    test  -d "$d" || mkdir --verbose -p "$d"
 done
 
 
@@ -180,17 +117,17 @@ mpc_tarfile=mpc-${mpc_version}.tar.gz
 isl_tarfile=isl-${isl_version}.tar.bz2
 gcc_tarfile=gcc-${gcc_version}.tar.gz
 
-__wget https://gmplib.org/download/gmp              $gmp_tarfile
-__wget https://ftp.gnu.org/gnu/mpfr                 $mpfr_tarfile
-__wget http://www.multiprecision.org/downloads      $mpc_tarfile
-__wget https://gcc.gnu.org/pub/gcc/infrastructure     $isl_tarfile
-__wget https://ftp.gnu.org/gnu/gcc/gcc-${gcc_version} $gcc_tarfile
+__wget https://gmplib.org/download/gmp              "$tarfile_dir/$gmp_tarfile"
+__wget https://ftp.gnu.org/gnu/mpfr                 "$tarfile_dir/$mpfr_tarfile"
+__wget http://www.multiprecision.org/downloads      "$tarfile_dir/$mpc_tarfile"
+__wget https://gcc.gnu.org/pub/gcc/infrastructure     "$tarfile_dir/$isl_tarfile"
+__wget https://ftp.gnu.org/gnu/gcc/gcc-"${gcc_version}" "$tarfile_dir/$gcc_tarfile"
 
 # Check tarfiles are found, if not found, dont proceed
 for f in $gmp_tarfile $mpfr_tarfile $mpc_tarfile $isl_tarfile $gcc_tarfile
 do
     if [ ! -f "$tarfile_dir/$f" ]; then
-        __die tarfile not found: $tarfile_dir/$f
+        __die tarfile not found: "$tarfile_dir/$f"
     fi
 done
 
@@ -209,16 +146,16 @@ __banner Unpacking source code
 __untar  "$source_dir"  "$tarfile_dir/$gcc_tarfile"
 
 __untar  "$source_dir/gcc-${gcc_version}"  "$tarfile_dir/$mpfr_tarfile"
-mv -v $source_dir/gcc-${gcc_version}/mpfr-${mpfr_version} $source_dir/gcc-${gcc_version}/mpfr
+mv -v "$source_dir/gcc-${gcc_version}/mpfr-${mpfr_version}" "$source_dir/gcc-${gcc_version}/mpfr"
 
 __untar  "$source_dir/gcc-${gcc_version}"  "$tarfile_dir/$mpc_tarfile"
-mv -v $source_dir/gcc-${gcc_version}/mpc-${mpc_version} $source_dir/gcc-${gcc_version}/mpc
+mv -v "$source_dir/gcc-${gcc_version}/mpc-${mpc_version}" "$source_dir/gcc-${gcc_version}/mpc"
 
 __untar "$source_dir/gcc-${gcc_version}"  "$tarfile_dir/$gmp_tarfile"
-mv -v $source_dir/gcc-${gcc_version}/gmp-${gmp_version} $source_dir/gcc-${gcc_version}/gmp
+mv -v "$source_dir/gcc-${gcc_version}/gmp-${gmp_version}" "$source_dir/gcc-${gcc_version}/gmp"
 
 __untar "$source_dir/gcc-${gcc_version}"  "$tarfile_dir/$isl_tarfile"
-mv -v $source_dir/gcc-${gcc_version}/isl-${isl_version} $source_dir/gcc-${gcc_version}/isl
+mv -v "$source_dir/gcc-${gcc_version}/isl-${isl_version}" "$source_dir/gcc-${gcc_version}/isl"
 
 
 #======================================================================
@@ -239,7 +176,7 @@ H=$HOME
 
 for i in $(env | awk -F"=" '{print $1}') ;
 do
-    unset $i || true   # ignore unset fails
+    unset "$i" || true   # ignore unset fails
 done
 
 # restore
@@ -263,31 +200,31 @@ CC=gcc
 CXX=g++
 OPT_FLAGS="-O2 $gflags -Wall  $arch_flags"
 CC="$CC" CXX="$CXX" CFLAGS="$OPT_FLAGS" \
-    CXXFLAGS="`echo " $OPT_FLAGS " | sed 's/ -Wall / /g'`" \
-    $source_dir/gcc-${gcc_version}/configure --prefix=${install_dir} \
-    --enable-bootstrap \
-    --enable-shared \
-    --enable-threads=posix \
-    --enable-checking=release \
-    --with-system-zlib \
-    --enable-__cxa_atexit \
-    --disable-libunwind-exceptions \
-    --enable-linker-build-id \
-    --enable-languages=${langs} \
-    --disable-vtable-verify \
-    --with-default-libstdcxx-abi=new \
-    --enable-libstdcxx-debug  \
-    --without-included-gettext  \
-    --enable-plugin \
-    --disable-initfini-array \
-    --disable-libgcj \
-    --enable-plugin  \
-    --disable-multilib \
-    --with-tune=generic \
-    --build=${build_target} \
-    --target=${build_target} \
-    --host=${build_target} \
-    --with-pkgversion="$packageversion"
+CXXFLAGS="$(echo " $OPT_FLAGS " | sed 's/ -Wall / /g'$)" \
+"$source_dir"/gcc-"${gcc_version}"/configure --prefix="${install_dir}" \
+--enable-bootstrap \
+--enable-shared \
+--enable-threads=posix \
+--enable-checking=release \
+--with-system-zlib \
+--enable-__cxa_atexit \
+--disable-libunwind-exceptions \
+--enable-linker-build-id \
+--enable-languages="${langs}" \
+--disable-vtable-verify \
+--with-default-libstdcxx-abi=new \
+--enable-libstdcxx-debug  \
+--without-included-gettext  \
+--enable-plugin \
+--disable-initfini-array \
+--disable-libgcj \
+--enable-plugin  \
+--disable-multilib \
+--with-tune=generic \
+--build=${build_target} \
+--target=${build_target} \
+--host=${build_target} \
+--with-pkgversion="$packageversion"
 
 
 #======================================================================
@@ -321,7 +258,7 @@ make install
 
 # Create a shell script that users can source to bring gcc into shell
 # environment
-cat << EOF > ${install_dir}/activate
+cat << EOF > "${install_dir}/activate"
 # source this script to bring gcc ${gcc_version} into your environment
 export PATH="${install_dir}/bin:\$PATH"
 export LD_LIBRARY_PATH="${install_dir}/lib:${install_dir}/lib64:\$LD_LIBRARY_PATH"
@@ -329,7 +266,7 @@ export MANPATH="${install_dir}/share/man:\$MANPATH"
 export INFOPATH="${install_dir}/share/info:\$INFOPATH"
 EOF
 
-cat << EOF > ${install_dir}/deactivate
+cat << EOF > "${install_dir}/deactivate"
 # source this script to remove gcc ${gcc_version} from your environment
 export PATH=\`echo \$PATH | sed "s~${install_dir}/bin:~~g"\`
 export LD_LIBRARY_PATH=\`echo \$LD_LIBRARY_PATH | sed "s~${install_dir}/lib:${install_dir}/lib64:~~g"\`
@@ -337,14 +274,22 @@ export MANPATH=\`echo \$MANPATH | sed "s~${install_dir}/share/man:~~g"\`
 export INFOPATH=\` echo \$INFOPATH | sed "s~${install_dir}/share/info:~~g"\`
 EOF
 
-gcc_main_version=`echo ${gcc_version} | sed 's/\..*//g'`
-cat << EOF > ${HOME}/Software/bin/gcc${gcc_main_version}_activate 
+gcc_main_version=${gcc_version//\.*/}
+cat << EOF > "${HOME}/Software/bin/gcc${gcc_main_version}_activate"
 source ${install_dir}/activate
 EOF
 
-cat << EOF > ${HOME}/Software/bin/gcc${gcc_main_version}_deactivate 
+cat << EOF > "${HOME}/Software/bin/gcc${gcc_main_version}_deactivate"
 source ${install_dir}/deactivate
 EOF
+
+#======================================================================
+# Cleanup
+#======================================================================
+
+__banner Removing temporary files
+
+rm -rf "${tmp_dir}"
 
 __banner Complete
 
