@@ -77,8 +77,10 @@ isl_version=0.18
 # Support functions
 #======================================================================
 
-source ../common.sh
+source src_common.sh
 
+trap '__abort' 0
+set -e
 
 #======================================================================
 # Directory creation

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-source ../common.sh
+source src_common.sh
 
 __banner Ensuring installation directories
 

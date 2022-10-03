@@ -1,6 +1,6 @@
 #! /bin/bash
 
-source ../src_common.sh
+source src_common.sh
 
 if nala --version > /dev/null 2>&1; then
     APT="sudo nala"

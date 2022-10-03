@@ -1,11 +1,11 @@
 #!/bin/bash
 
-source ../src_common.sh
+source src_common.sh
 
 trap '__abort' 0
 set -e
 
-source ../utils/src_init_package_manager.sh
+source utils/src_init_package_manager.sh
 
 
 $APT $UPDATE
@@ -13,7 +13,7 @@ $APT $UPGRADE
 
 if [ "$APT" == "sudo apt" ]; then
     ${APT} ${INSTALL} nala
-    source ../utils/src_init_package_manager.sh
+    source utils/src_init_package_manager.sh
 fi
 
 UBUNTU_PKG="g++ clang-format apt  tar zip unzip curl"
