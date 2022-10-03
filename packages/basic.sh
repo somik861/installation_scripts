@@ -11,7 +11,7 @@ if [ "$APT" == "sudo apt" ]; then
     source ../utils/init_package_manager.sh
 fi
 
-UBUNTU_PKG="g++ clang-format tar untar zip unzip curl"
+UBUNTU_PKG="g++ clang-format tar zip unzip curl"
 ALL_PKG="git make perl gcc clang cmake"
 ARCH_PKG=""
 
