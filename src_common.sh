@@ -53,13 +53,15 @@ EOF
 # wget url save_to
 __wget()
 {
-    urlroot=$1; shift
-    tarfile=$1; shift
+    url=$1; shift
+    file=$1; shift
     
-    if [ ! -e "$tarfile" ]; then
-        wget --verbose "${urlroot}/$tarfile" --directory-prefix="$(dirname "$tarfile")"
+    if [ ! -e "$file" ]; then
+        wget --verbose "$url" -O "$FILE"
     else
-        echo "already downloaded: $tarfile  '$tarfile'"
+        echo "already downloaded: $file"
     fi
 }
+
+set -e
 

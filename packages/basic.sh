@@ -3,7 +3,6 @@
 source src_common.sh
 
 trap '__abort' 0
-set -e
 
 source utils/src_init_package_manager.sh
 
@@ -16,8 +15,8 @@ if [ "$APT" == "sudo apt" ]; then
     source utils/src_init_package_manager.sh
 fi
 
-UBUNTU_PKG="g++ clang-format apt tar zip unzip curl build-essential"
-ALL_PKG="git make perl gcc clang cmake tmux vim"
+UBUNTU_PKG="g++ clang-format apt tar zip unzip curl build-essential zlib1g-dev"
+ALL_PKG="git make perl gcc clang cmake tmux vim texlive-full net-tools"
 ARCH_PKG=""
 
 if [ "$APT" == "sudo apt" ] || [ "$APT" == "sudo nala" ]; then

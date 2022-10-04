@@ -80,7 +80,6 @@ isl_version=0.18
 source src_common.sh
 
 trap '__abort' 0
-set -e
 
 #======================================================================
 # Directory creation
@@ -119,11 +118,11 @@ mpc_tarfile=mpc-${mpc_version}.tar.gz
 isl_tarfile=isl-${isl_version}.tar.bz2
 gcc_tarfile=gcc-${gcc_version}.tar.gz
 
-__wget https://gmplib.org/download/gmp              "$tarfile_dir/$gmp_tarfile"
-__wget https://ftp.gnu.org/gnu/mpfr                 "$tarfile_dir/$mpfr_tarfile"
-__wget http://www.multiprecision.org/downloads      "$tarfile_dir/$mpc_tarfile"
-__wget https://gcc.gnu.org/pub/gcc/infrastructure     "$tarfile_dir/$isl_tarfile"
-__wget https://ftp.gnu.org/gnu/gcc/gcc-"${gcc_version}" "$tarfile_dir/$gcc_tarfile"
+__wget "https://gmplib.org/download/gmp/$gmp_tarfile"              "$tarfile_dir/$gmp_tarfile"
+__wget "https://ftp.gnu.org/gnu/mpfr/$mpfr_tarfile"                 "$tarfile_dir/$mpfr_tarfile"
+__wget "http://www.multiprecision.org/downloads/$mpc_tarfile"   "$tarfile_dir/$mpc_tarfile"
+__wget "https://gcc.gnu.org/pub/gcc/infrastructure/$isl_tarfile"     "$tarfile_dir/$isl_tarfile"
+__wget "https://ftp.gnu.org/gnu/gcc/gcc-${gcc_version}/$gcc_tarfile" "$tarfile_dir/$gcc_tarfile"
 
 # Check tarfiles are found, if not found, dont proceed
 for f in $gmp_tarfile $mpfr_tarfile $mpc_tarfile $isl_tarfile $gcc_tarfile
