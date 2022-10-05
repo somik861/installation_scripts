@@ -1,16 +1,23 @@
 #! /bin/bash
 
 source src_common.sh
+source utils/src_init_shell.sh
 
 trap '__abort' 0
 URL="https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh"
 FILE="$(basename "$URL")"
+INSTALL_DIR="${HOME}/.anaconda3"
 
 __wget "$URL" "$FILE"
 chmod u+x "$FILE"
-./"$FILE" -p "${HOME}/.anaconda3" -b 
+./"$FILE" -p "${INSTALL_DIR}" -b 
+BIN="${INSTALL_DIR}/bin"
 
-# eval "$(conda shell.bash hook)"
+eval "$("${BIN}/conda" shell.bash hook)"
+conda init $SHELL_NAME 
+conda config --set auto_activate_base false
+
+./python/rebuild_env.sh
 
 rm "$FILE"
 trap : 0
