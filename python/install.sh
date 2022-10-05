@@ -10,6 +10,8 @@ if ! conda -h >/dev/null 2>&1; then
     FILE="$(basename "$URL")"
     INSTALL_DIR="${HOME}/.anaconda3"
 
+    rm -rf "${INSTALL_DIR}" 
+
     __wget "$URL" "$FILE"
     chmod u+x "$FILE"
     ./"$FILE" -p "${INSTALL_DIR}" -b 
