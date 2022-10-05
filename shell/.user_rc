@@ -3,3 +3,12 @@ alias oldvim=$(which vim)
 alias vim=nvim
 alias vi=nvim
 
+function tmx
+{
+    if tmux ls 2> /dev/null | grep '^tmx_session' > /dev/null
+    then
+        tmux attach -t tmx_session 2> /dev/null
+    else
+        tmux new -s tmx_session 2> /dev/null
+    fi
+}
