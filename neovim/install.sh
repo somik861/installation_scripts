@@ -1,7 +1,7 @@
 #! /bin/bash
 
-source ../utils/prepare_dirs.sh
-source ../common.sh
+source utils/src_prepare_dirs.sh
+source src_common.sh
 
 __banner Installing neovim
 
@@ -10,5 +10,6 @@ FILE="$(basename "$URL")"
 __wget "$URL" "$FILE"
 __untar "$FILE" "."
 mv ./nvim-linux64/* "${SOFTWARE_HOME}"
+rm -r ./nvim-linux64
 
-source configure.sh
+source neovim/configure.sh
