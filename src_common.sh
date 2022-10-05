@@ -32,7 +32,7 @@ __untar()
             tar xz -C "$dir" -f "$file"
         ;;
         *)
-            __die "don't know how to unzip $file"
+            tar x -C "$dir" -f "$file"
         ;;
     esac
 }

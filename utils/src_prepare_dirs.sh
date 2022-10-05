@@ -1,7 +1,7 @@
 #! /bin/bash
 
 source src_common.sh
-source util/src_init_shell.sh
+source utils/src_init_shell.sh
 
 __banner Ensuring installation directories
 

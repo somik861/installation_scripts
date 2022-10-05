@@ -11,5 +11,6 @@ __wget "$URL" "$FILE"
 __untar "$FILE" "."
 mv ./nvim-linux64/* "${SOFTWARE_HOME}"
 rm -r ./nvim-linux64
+rm "$FILE"
 
 source neovim/configure.sh
