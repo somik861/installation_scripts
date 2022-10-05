@@ -57,7 +57,7 @@ __wget()
     file=$1; shift
     
     if [ ! -e "$file" ]; then
-        wget --verbose "$url" -O "$FILE"
+        wget --verbose "$url" -O "$file"
     else
         echo "already downloaded: $file"
     fi

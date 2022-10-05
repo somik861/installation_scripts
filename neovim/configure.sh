@@ -3,4 +3,4 @@
 __banner Copying neovim configuration files
 
 rm -rf ~/.config/nvim
-cp -r config/nvim ~/.config/
+cp -r neovim/config/nvim ~/.config/

@@ -5,16 +5,16 @@ source utils/src_init_shell.sh
 
 __banner Ensuring installation directories
 
-SOFTARE_HOME="${HOME}/Software/general"
+SOFTWARE_HOME="${HOME}/Software/general"
 
-mkdir -p "${SOFTARE_HOME}/bin"
-mkdir -p "${SOFTARE_HOME}/lib"
-mkdir -p "${SOFTARE_HOME}/lib64"
-mkdir -p "${SOFTARE_HOME}/share/man"
-mkdir -p "${SOFTARE_HOME}/share/info"
-mkdir -p "${SOFTARE_HOME}/include"
+mkdir -p "${SOFTWARE_HOME}/bin"
+mkdir -p "${SOFTWARE_HOME}/lib"
+mkdir -p "${SOFTWARE_HOME}/lib64"
+mkdir -p "${SOFTWARE_HOME}/share/man"
+mkdir -p "${SOFTWARE_HOME}/share/info"
+mkdir -p "${SOFTWARE_HOME}/include"
 
-_PATH_BIN="export PATH=\"${SOFTARE_HOME}\bin:\$PATH\""
-if ! grep -qx "${_EXPORT_BIN}" "${SHELL_RC}"; then
+_PATH_BIN="export PATH=\"${SOFTWARE_HOME}/bin:\$PATH\""
+if ! grep -qx "${_PATH_BIN}" "${SHELL_RC}"; then
     echo "${_PATH_BIN}" >> "${SHELL_RC}"
 fi
