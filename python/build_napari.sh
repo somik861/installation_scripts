@@ -20,13 +20,13 @@ fi
 
 conda create -y -n ${ENV_NAME} python=${PYTHON_V}
 conda activate ${ENV_NAME}
-pip3 install -r 'napari[all]' imagecodecs napari-bioformats
+pip3 install 'napari[all]' imagecodecs napari-bioformats imageio_ffmpeg
 conda deactivate
 
 cat << EOF > "${HOME}/.napari_rc"
 #!/bin/bash
 
-function napari{
+function napari {
     conda activate ${ENV_NAME}
     python -m napari \$*
     conda deactivate
