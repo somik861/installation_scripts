@@ -5,7 +5,7 @@ source utils/src_init_package_manager.sh
 
 trap '__abort' 0
 
-URL="https://go.skype.com/skype.download"
+URL="https://go.skype.com/skypeforlinux-64.deb"
 FILE="./skype.deb"
 
 __wget "$URL" "$FILE"
