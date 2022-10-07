@@ -13,8 +13,8 @@ fi
 KEY=$(cat "$HOME/.ssh/id_ed25519.pub")
 
 for HOST in $HOSTS; do
-    echo "Enter password for ${HOST}:"
-    ssh ${HOST} "mkdir -p ~/.ssh && echo ${KEY} >> ~/.ssh/authorized_keys"
+    echo "Proccessing ${HOST}:"
+    ssh ${HOST} "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && if ! grep -qx \"${KEY}\" ~/.ssh/authorized_keys; then echo \"${KEY}\" >> ~/.ssh/authorized_keys; fi"
 done
 
 trap : 0
