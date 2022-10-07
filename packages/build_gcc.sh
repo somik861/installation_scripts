@@ -45,11 +45,11 @@ build_target=x86_64-linux-gnu
 #
 # WARNING: do not make 'source_dir' and 'build_dir' the same, or
 # subdirectory of each other! It will cause build problems.
-tmp_dir=${HOME}/tmp
-install_dir="${SOFTWARE_HOME}/../gcc-${gcc_version}"
-build_dir=${tmp_dir}/gcc-${gcc_version}_build
-source_dir=${tmp_dir}/gcc-${gcc_version}_source
-tarfile_dir=${tmp_dir}/gcc-${gcc_version}_tarballs
+tmp_dir="${HOME}/tmp"
+install_dir="$(realpath "${SOFTWARE_HOME}/../gcc-${gcc_version}")"
+build_dir="${tmp_dir}/gcc-${gcc_version}_build"
+source_dir="${tmp_dir}/gcc-${gcc_version}_source"
+tarfile_dir="${tmp_dir}/gcc-${gcc_version}_tarballs"
 
 # String which gets embedded into gcc version info, can be accessed at
 # runtime. Use to indicate who/what/when has built this compiler.
