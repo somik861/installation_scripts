@@ -48,8 +48,8 @@ build_target=x86_64-linux-gnu
 tmp_dir=${HOME}/tmp
 install_dir="${SOFTWARE_HOME}/../gcc-${gcc_version}"
 build_dir=${tmp_dir}/gcc-${gcc_version}_build
-source_dir=${tmp_dir}/tmp/gcc-${gcc_version}_source
-tarfile_dir=${tmp_dir}/tmp/gcc-${gcc_version}_tarballs
+source_dir=${tmp_dir}/gcc-${gcc_version}_source
+tarfile_dir=${tmp_dir}/gcc-${gcc_version}_tarballs
 
 # String which gets embedded into gcc version info, can be accessed at
 # runtime. Use to indicate who/what/when has built this compiler.
