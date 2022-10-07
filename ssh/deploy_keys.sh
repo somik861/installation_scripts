@@ -7,7 +7,7 @@ trap '__abort' 0
 HOSTS=$(cat "$HOME/.ssh/config" | grep 'Host ' | sed 's/Host //g')
 
 if ! [ -f "$HOME/.ssh/id_ed25519.pub" ]; then
-    __die Not implemented
+    ssh-keygen -t ed25519 -f "${HOME}/.ssh/id_ed25519" -N ''
 fi
 
 KEY=$(cat "$HOME/.ssh/id_ed25519.pub")
