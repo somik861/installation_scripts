@@ -1,5 +1,8 @@
 #!/bin/bash
 
+source src_common.sh
+source utils/src_prepare_dirs.sh
+
 # Instructions for building gcc 8.x from source.
 
 # This gcc build script is free software; you can redistribute it and/or modify
@@ -43,7 +46,7 @@ build_target=x86_64-linux-gnu
 # WARNING: do not make 'source_dir' and 'build_dir' the same, or
 # subdirectory of each other! It will cause build problems.
 tmp_dir=${HOME}/tmp
-install_dir=${HOME}/Software/gcc-${gcc_version}
+install_dir="${SOFTWARE_HOME}/../gcc-${gcc_version}"
 build_dir=${tmp_dir}/gcc-${gcc_version}_build
 source_dir=${tmp_dir}/tmp/gcc-${gcc_version}_source
 tarfile_dir=${tmp_dir}/tmp/gcc-${gcc_version}_tarballs
@@ -76,8 +79,6 @@ isl_version=0.18
 #======================================================================
 # Support functions
 #======================================================================
-
-source src_common.sh
 
 trap '__abort' 0
 
@@ -276,13 +277,15 @@ export INFOPATH=\` echo \$INFOPATH | sed "s~${install_dir}/share/info:~~g"\`
 EOF
 
 gcc_main_version=${gcc_version//\.*/}
-cat << EOF > "${HOME}/Software/bin/gcc${gcc_main_version}_activate"
+cat << EOF > "${SOFTWARE_HOME}/bin/gcc${gcc_main_version}_activate"
 source ${install_dir}/activate
 EOF
 
-cat << EOF > "${HOME}/Software/bin/gcc${gcc_main_version}_deactivate"
+cat << EOF > "${SOFTWARE_HOME}/bin/gcc${gcc_main_version}_deactivate"
 source ${install_dir}/deactivate
 EOF
+
+chmod u+x "${SOFTWARE_HOME}/bin/gcc${gcc_main_version}_activate" "${SOFTWARE_HOME}/bin/gcc${gcc_main_version}_deactivate"
 
 #======================================================================
 # Cleanup
