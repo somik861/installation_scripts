@@ -2,7 +2,7 @@
 
 source src_common.sh
 
-trap'__abort' 0
+trap '__abort' 0
 
 __banner Updating package manager
 packages/basic.sh
