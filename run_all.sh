@@ -28,6 +28,7 @@ __banner Installing rest of packages
 packages/build_skype.sh
 packages/build_vscode.sh
 packages/build_openmpi.sh
+packages/build_vcpkg.sh
 
 __banner Installing ssh
 ssh/install.sh
