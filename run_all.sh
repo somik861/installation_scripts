@@ -18,9 +18,6 @@ neovim/install.sh
 __banner Installing anaconda
 python/install.sh
 
-__banner Installing ssh
-ssh/install.sh
-
 __banner Building gcc
 packages/build_gcc.sh 12.2.0 default
 packages/build_gcc.sh 11.3.0 default
@@ -31,5 +28,8 @@ __banner Installing rest of packages
 packages/build_skype.sh
 packages/build_vscode.sh
 packages/build_openmpi.sh
+
+__banner Installing ssh
+ssh/install.sh
 
 trap : 0
