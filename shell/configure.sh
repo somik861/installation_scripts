@@ -4,6 +4,9 @@ source src_common.sh
 
 trap '__abort' 0
 
+mkdir  -p "${HOME}/.local/share/fonts"
+cp shell/fonts/* "${HOME}/.local/share/fonts"
+
 rm -rf "${HOME}/.zshrc" "${HOME}/.oh-my-zsh" "${HOME}/.p10k.zsh"
 
 # OH MY ZSH
