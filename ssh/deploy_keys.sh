@@ -14,7 +14,7 @@ KEY=$(cat "$HOME/.ssh/id_ed25519.pub")
 
 for HOST in $HOSTS; do
     echo "Proccessing ${HOST}:"
-    if ! ssh ${HOST} "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && if ! grep -qx \"${KEY}\" ~/.ssh/authorized_keys; then echo \"${KEY}\" >> ~/.ssh/authorized_keys; fi"; then 
+    if ! ssh -o ConnectTimeout=10 -o BatchMode=yes ${HOST} "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && if ! grep -qx \"${KEY}\" ~/.ssh/authorized_keys; then echo \"${KEY}\" >> ~/.ssh/authorized_keys; fi"; then 
         echo "### WARNING: ${HOST} did not recieve key"
     fi
 done
