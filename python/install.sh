@@ -25,5 +25,6 @@ if ! conda -h >/dev/null 2>&1; then
 fi
 
 ./python/rebuild_env.sh
+./python/build_napari.sh
 
 trap : 0
