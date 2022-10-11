@@ -5,8 +5,12 @@ source utils/src_init_package_manager.sh
 
 trap '__abort' 0
 
-wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key|sudo apt-key add -
-sudo mv /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d/llvm-snapshot.gpg
+echo "Enter password:"
+wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
+
+if [ -f /etc/apt/trusted.gpg ]; then
+    sudo mv /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d/llvm-snapshot.gpg
+fi
 
 echo "deb http://apt.llvm.org/jammy/ llvm-toolchain-jammy-15 main" | sudo tee /etc/apt/sources.list.d/llvm-15.list
 echo "deb-src http://apt.llvm.org/jammy/ llvm-toolchain-jammy-15 main" | sudo tee -a /etc/apt/sources.list.d/llvm-15.list
