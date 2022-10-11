@@ -39,6 +39,7 @@ packages/build_openmpi.sh
 packages/build_vcpkg.sh
 packages/build_spotify.sh
 packages/build_opera.sh
+packages/build_clang15.sh
 
 __banner Installing ssh
 ssh/install.sh

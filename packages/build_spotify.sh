@@ -12,6 +12,4 @@ echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sou
 ${APT} ${UPDATE}
 ${APT} ${INSTALL} spotify-client
 
-rm -rf "$FILE"
-
 trap : 0
