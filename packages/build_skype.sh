@@ -11,6 +11,7 @@ FILE="./skype.deb"
 __wget "$URL" "$FILE"
 
 ${APT} ${INSTALL} ${FILE}
+sudo mv /etc/apt/trusted.gpg /etc/apt/trusted.gpg.d/skypeforlinux.gpg
 
 rm -rf "$FILE"
 
