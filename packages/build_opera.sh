@@ -12,6 +12,12 @@ __wget "$URL" "$FILE"
 
 ${APT} ${INSTALL} ${FILE}
 
+${APT} ${INSTALL} snapd
+sudo snap install chromium-ffmpeg
+LIB=$(find /snap -name libffmpeg.so 2> /dev/null | tail -n 1)
+sudo mkdir -p /usr/lib/x86_64-linux-gnu/opera/lib_extra
+sudo cp "$LIB" /usr/lib/x86_64-linux-gnu/opera/lib_extra/
+
 rm -rf "$FILE"
 
 trap : 0
