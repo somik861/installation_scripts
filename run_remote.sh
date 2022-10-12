@@ -26,7 +26,9 @@ __banner Building gcc
 source utils/src_init_shell.sh
 packages/build_gcc.sh 12.2.0 default
 packages/build_gcc.sh 11.3.0 default
-echo "source gcc12_activate" >> "${SHELL_RC}"
+if ! grep -qx 'source gcc12_activate' "${SHELL_RC}"; then
+   echo "source gcc12_activate" >> "${SHELL_RC}"
+fi
 
 __banner Installing rest of packages
 packages/build_openmpi.sh
