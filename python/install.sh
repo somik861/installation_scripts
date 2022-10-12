@@ -5,25 +5,23 @@ source utils/src_init_shell.sh
 
 trap '__abort' 0
 
-if ! conda -h >/dev/null 2>&1; then
-    URL="https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh"
-    FILE="$(basename "$URL")"
-    INSTALL_DIR="${HOME}/.anaconda3"
+URL="https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh"
+FILE="$(basename "$URL")"
+INSTALL_DIR="${HOME}/.anaconda3"
 
-    rm -rf "${INSTALL_DIR}" 
+rm -rf "${INSTALL_DIR}" 
 
-    __wget "$URL" "$FILE"
-    chmod u+x "$FILE"
-    ./"$FILE" -p "${INSTALL_DIR}" -b 
-    BIN="${INSTALL_DIR}/bin"
+__wget "$URL" "$FILE"
+chmod u+x "$FILE"
+./"$FILE" -p "${INSTALL_DIR}" -b 
+BIN="${INSTALL_DIR}/bin"
 
-    eval "$("${BIN}/conda" shell.bash hook)"
-    conda init $SHELL_NAME 
-    conda config --set auto_activate_base false
+eval "$("${BIN}/conda" shell.bash hook)"
+conda init $SHELL_NAME 
+conda config --set auto_activate_base false
 
-    conda update -y -n base -c defaults conda
-    rm "$FILE"
-fi
+conda update -y -n base -c defaults conda
+rm "$FILE"
 
 ./python/rebuild_env.sh
 ./python/build_napari.sh
