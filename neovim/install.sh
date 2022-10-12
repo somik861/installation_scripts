@@ -5,12 +5,10 @@ source src_common.sh
 
 __banner Installing neovim
 
-URL="https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.tar.gz"
-FILE="$(basename "$URL")"
-__wget "$URL" "$FILE"
-tar xf "$FILE"
-cp -rf ./nvim-linux64/* "${SOFTWARE_HOME}"
-rm -r ./nvim-linux64
-rm "$FILE"
+FILE="neovim-bin.tar"
+tar xf "neovim/${FILE}"
+cp -r neovim-bin/* "${SOFTWARE_HOME}"
+
+rm -rf neovim-bin
 
 source neovim/configure.sh
