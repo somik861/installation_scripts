@@ -1,0 +1,20 @@
+Host aisa
+    Hostname aisa.fi.muni.cz
+    User xjurack1
+
+Host gryf
+    Hostname gryf.fi.muni.cz
+    User xjurack1
+
+Host alfa
+    Hostname alfa.fi.muni.cz
+    Port 2200
+    User xjurack1
+
+Host aira
+    Hostname airacuda.fi.muni.cz
+    User u493342
+
+Host barra
+    Hostname barracuda.fi.muni.cz
+    User u493342
