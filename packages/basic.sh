@@ -16,7 +16,7 @@ if [ "$APT" == "sudo apt" ]; then
 fi
 
 UBUNTU_PKG="g++ clang-format apt tar zip unzip curl build-essential zlib1g-dev libssl-dev libtool libtool-bin gettext"
-ALL_PKG="git make perl gcc clang cmake tmux vim texlive-full net-tools wget vlc"
+ALL_PKG="git make perl gcc clang cmake tmux vim texlive-full net-tools wget vlc pkgconfig"
 ARCH_PKG=""
 
 if [ "$APT" == "sudo apt" ] || [ "$APT" == "sudo nala" ]; then
