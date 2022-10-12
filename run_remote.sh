@@ -10,6 +10,9 @@ grep -x 'export.*' "${HOME}/.bashrc" > _tmp.sh
 source ./_tmp.sh
 rm _tmp.sh
 
+__banner Setting up shell
+shell/include_user_rc.sh
+
 __banner Setting up git
 git/setup.sh
 
