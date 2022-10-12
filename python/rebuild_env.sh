@@ -9,7 +9,6 @@ PYTHON_V=3.10
 ENV_NAME=py310
 
 eval "$(conda shell.bash hook)"
-conda update -y -n base -c defaults conda
 
 if conda env list | grep -q "${ENV_NAME}.*\*"; then
     conda deactivate

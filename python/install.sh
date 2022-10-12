@@ -21,6 +21,7 @@ if ! conda -h >/dev/null 2>&1; then
     conda init $SHELL_NAME 
     conda config --set auto_activate_base false
 
+    conda update -y -n base -c defaults conda
     rm "$FILE"
 fi
 
