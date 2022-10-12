@@ -40,6 +40,8 @@ packages/build_vcpkg.sh
 packages/build_spotify.sh
 packages/build_opera.sh
 packages/build_clang15.sh
+packages/build_vncviewer.sh
+packages/build_teamviewer.sh
 
 __banner Installing ssh
 cp ssh/config_local ssh/config
