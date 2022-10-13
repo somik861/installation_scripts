@@ -17,7 +17,7 @@ fi
 
 UBUNTU_PKG="g++ clang-format apt tar zip unzip curl build-essential zlib1g-dev libssl-dev libtool libtool-bin gettext openjdk-19-jdk maven"
 ALL_PKG="git make perl gcc clang cmake tmux vim texlive-full net-tools wget vlc pkgconfig"
-ARCH_PKG=""
+ARCH_PKG="qbittorrent"
 
 if [ "$APT" == "sudo apt" ] || [ "$APT" == "sudo nala" ]; then
     $APT $INSTALL $ALL_PKG $UBUNTU_PKG
