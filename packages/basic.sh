@@ -15,7 +15,7 @@ if [ "$APT" == "sudo apt" ]; then
     source utils/src_init_package_manager.sh
 fi
 
-UBUNTU_PKG="g++ clang-format apt tar zip unzip curl build-essential zlib1g-dev libssl-dev libtool libtool-bin gettext openjdk-18-jdk maven network-manager-openvpn cmake-curses-gui libreoffice xclip nomacs"
+UBUNTU_PKG="g++ clang-format apt tar zip unzip curl build-essential zlib1g-dev libssl-dev libtool libtool-bin gettext openjdk-18-jdk maven network-manager-openvpn cmake-curses-gui libreoffice xclip nomacs gimp"
 ALL_PKG="git make perl gcc clang cmake tmux vim texlive-full net-tools wget vlc pkg-config htop"
 ARCH_PKG="qbittorrent"
 
