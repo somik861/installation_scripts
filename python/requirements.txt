@@ -18,3 +18,7 @@ torchaudio
 wakeonlan
 pynvim
 matplotlib
+notebook
+jupyterlab
+qtconsole
+ipywidgets
