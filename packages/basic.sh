@@ -24,7 +24,7 @@ if [ "$APT" == "sudo apt" ] || [ "$APT" == "sudo nala" ]; then
     elif [ "$APT" == "sudo pacman" ]; then
     $APT $INSTALL $ALL_PKG $ARCH_PKG
 else
-    __die Unkown distro package manager
+    __die Unknown distro package manager
 fi
 
 trap : 0
