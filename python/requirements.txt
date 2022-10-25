@@ -18,6 +18,8 @@ torchaudio
 wakeonlan
 pynvim
 matplotlib
+nbconvert>=7
+mistune>=2
 notebook
 jupyterlab
 qtconsole
