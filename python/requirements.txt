@@ -24,3 +24,4 @@ notebook
 jupyterlab
 qtconsole
 ipywidgets
+papermill
