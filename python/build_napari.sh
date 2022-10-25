@@ -5,7 +5,7 @@ source utils/src_init_shell.sh
 
 trap '__abort' 0
 
-PYTHON_V=3.10
+PYTHON_V=3.9
 ENV_NAME=napari-env
 
 eval "$(conda shell.bash hook)"
