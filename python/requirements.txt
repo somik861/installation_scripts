@@ -20,7 +20,8 @@ pynvim
 matplotlib
 nbconvert>=7
 mistune>=2
-notebook
+notebook==6.1.5
+jupyter_contrib_nbextensions
 jupyterlab
 qtconsole
 ipywidgets
