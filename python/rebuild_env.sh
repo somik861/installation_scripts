@@ -20,6 +20,8 @@ fi
 conda create -y -n ${ENV_NAME} python=${PYTHON_V}
 conda activate ${ENV_NAME}
 pip3 install -r python/requirements.txt
+jupyter contrib nbextension install --user
+jupyter nbextension enable varInspector/main
 
 sed -i "/conda activate ${ENV_NAME}/d" $SHELL_RC
 echo "conda activate ${ENV_NAME}" >> $SHELL_RC
