@@ -3,6 +3,7 @@ autopep8
 black
 scipy
 numpy
+pandas
 data-science-types
 scikit-image
 requests
