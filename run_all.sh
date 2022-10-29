@@ -43,6 +43,7 @@ packages/build_clang15.sh
 packages/build_vncviewer.sh
 packages/build_teamviewer.sh
 packages/build_qbittorrent.sh
+packages/build_virtualbox.sh
 
 __banner Installing ssh
 cp ssh/config_local ssh/config
