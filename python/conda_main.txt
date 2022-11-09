@@ -1,0 +1,17 @@
+mypy
+autoepp8
+black
+scipy
+numpy
+pandas
+scikit-image
+requests
+numba
+torch
+torchvision
+matplotlib
+mistune>=2
+notebook<7
+jupyterlab
+qtconsole
+ipywidgets

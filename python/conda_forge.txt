@@ -1,0 +1,9 @@
+data-science-types
+czifile
+pyright
+imagecodecs>=2022.8.8
+tifffile>=2022.8.12
+pynvim
+nbconvert>=7
+jupyter_contrib_nbextensions
+papermill
