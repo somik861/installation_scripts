@@ -266,6 +266,9 @@ export PATH="${install_dir}/bin:\$PATH"
 export LD_LIBRARY_PATH="${install_dir}/lib:${install_dir}/lib64:\$LD_LIBRARY_PATH"
 export MANPATH="${install_dir}/share/man:\$MANPATH"
 export INFOPATH="${install_dir}/share/info:\$INFOPATH"
+
+export CC="\$(which gcc)"
+export CXX="\$(which g++)"
 EOF
 
 cat << EOF > "${install_dir}/deactivate"
@@ -274,6 +277,9 @@ export PATH=\`echo \$PATH | sed "s~${install_dir}/bin:~~g"\`
 export LD_LIBRARY_PATH=\`echo \$LD_LIBRARY_PATH | sed "s~${install_dir}/lib:${install_dir}/lib64:~~g"\`
 export MANPATH=\`echo \$MANPATH | sed "s~${install_dir}/share/man:~~g"\`
 export INFOPATH=\` echo \$INFOPATH | sed "s~${install_dir}/share/info:~~g"\`
+
+export CC="\$(which gcc)"
+export CXX="\$(which g++)"
 EOF
 
 gcc_main_version=${gcc_version//\.*/}

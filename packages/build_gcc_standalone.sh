@@ -338,8 +338,8 @@ export LD_LIBRARY_PATH=\`echo \$LD_LIBRARY_PATH | sed "s~${install_dir}/lib:${in
 export MANPATH=\`echo \$MANPATH | sed "s~${install_dir}/share/man:~~g"\`
 export INFOPATH=\` echo \$INFOPATH | sed "s~${install_dir}/share/info:~~g"\`
 
-export CC=""
-export CXX=""
+export CC="\$(which gcc)"
+export CXX="\$(which g++)"
 EOF
 
 #======================================================================
