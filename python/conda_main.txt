@@ -1,5 +1,5 @@
 mypy
-autoepp8
+autopep8
 black
 scipy
 numpy
@@ -7,7 +7,9 @@ pandas
 scikit-image
 requests
 numba
-torch
+pytorch
+tensorflow
+keras
 torchvision
 matplotlib
 mistune>=2

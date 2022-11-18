@@ -7,3 +7,5 @@ pynvim
 nbconvert>=7
 jupyter_contrib_nbextensions
 papermill
+django
+django-stubs
