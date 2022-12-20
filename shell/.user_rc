@@ -4,6 +4,16 @@ alias oldvim=$(which vim)
 alias vim=nvim
 alias vi=nvim
 
+export SOFTWARE_HOME="${HOME}/Software/general"
+
+export PATH="${SOFTWARE_HOME}/bin:${PATH}"
+export LD_LIBRARY_PATH="${SOFTWARE_HOME}/lib:${SOFTWARE_HOME}/lib64:${LD_LIBRARY_PATH}"
+export MANPATH="${SOFTWARE_HOME}/share/man:${MANPATH}"
+export INFOPATH="${SOFTWARE_HOME}/share/info:${INFOPATH}"
+
+export C_INCLUDE_PATH="${SOFTWARE_HOME}/include:${C_INCLUDE_PATH}"
+export CPLUS_INCLUDE_PATH="${SOFTWARE_HOME}/include:${CPLUS_INCLUDE_PATH}"
+
 function tmx
 {
     if tmux ls 2> /dev/null | grep '^tmx_session' > /dev/null
@@ -13,3 +23,5 @@ function tmx
         tmux new -s tmx_session 2> /dev/null
     fi
 }
+
+
