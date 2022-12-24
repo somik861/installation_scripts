@@ -12,6 +12,4 @@ fi
 
 mv ssh/config "${HOME}/.ssh/"
 
-ssh/deploy_keys.sh
-
 trap : 0
