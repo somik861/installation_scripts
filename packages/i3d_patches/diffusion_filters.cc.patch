@@ -1,0 +1,67 @@
+--- diffusion_filters.cc	2023-01-02 15:10:09.717694453 +0100
++++ diffusion_filters_new.cc	2023-01-02 15:09:18.982136783 +0100
+@@ -23,16 +23,33 @@
+  *
+  * Diffusion filters
+  *
+- * Martin Maška (xmaska@fi.muni.cz) 2008 - 2011
++ * Martin Maska (xmaska@fi.muni.cz) 2008 - 2011
+  *
+  */
+ 
+ #include "diffusion_filters.h"
+ #include "filters.h"
++#include <cassert>
+ 
+ #ifdef WITH_LAPACK
+-	// LAPACK function for calculating eigenvalues and eigenvectors (double precision)
+-    extern "C" void dsyev_(const char &jobz, const char &uplo, const int &n, double *a, const int &lda, double *w, double *work, const int &lwork, int &info);
++
++    extern "C" {
++		#include <f2c.h>
++
++		// undef garbage from f2c
++		#undef min
++		#undef dmin
++		#undef max
++		#undef dmax
++		#undef abs
++		#undef dabs
++		#undef bit_test
++		#undef bit_clear
++		#undef bit_set
++
++        // LAPACK function for calculating eigenvalues and eigenvectors (double precision)
++		void dsyev_(char *jobz, char *uplo, integer *n, doublereal *a, integer *lda, doublereal *w, doublereal *work, integer *lwork, integer *info);
++	}
+ #endif // WITH_LAPACK
+ 
+ namespace i3d
+@@ -219,8 +236,15 @@
+ 	{
+ 		#ifdef WITH_LAPACK
+ 
+-			double tmp[102];
+-			int info;
++			char jobz = 'V';
++			char uplo = 'U';
++			integer rank = 3;
++			integer lda = 3;
++
++			doublereal work[9];
++			integer lwork = sizeof(work) / sizeof(doublereal);
++
++			integer info;
+ 		
+ 			// create a 3x3 symmetric matrix 
+ 			eigvec[0] = a;
+@@ -231,7 +255,8 @@
+ 			eigvec[8] = f;
+ 		
+ 			// compute its eigenvalues and eigenvectors
+-			dsyev_('V', 'U', 3, eigvec, 3, eigval, tmp, 102, info);
++			dsyev_(&jobz, &uplo, &rank, eigvec, &lda, eigval, work, &lwork, &info);
++			assert(info == 0);
+ 
+ 		#else   // WITH_LAPACK
+ 

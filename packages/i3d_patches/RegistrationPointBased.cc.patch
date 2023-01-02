@@ -1,0 +1,53 @@
+--- RegistrationPointBased.cc	2023-01-02 15:15:02.935374923 +0100
++++ RegistrationPointBased_new.cc	2023-01-02 15:14:51.107462205 +0100
+@@ -32,10 +32,23 @@
+ #include "RegistrationPointBased.h"
+ 
+ #ifdef WITH_LAPACK
+-    /// LAPACK function for calculating eigenvalues and eigenvectors
+-    extern "C" void dsyev_(const char *jobz, const char *uplo, const int *n,
+-	    double *a, const int *lda, double *w, double *work, const int *lwork,
+-	    int *info);
++    extern "C" {
++		#include <f2c.h>
++
++		// undef garbage from f2c
++		#undef min
++		#undef dmin
++		#undef max
++		#undef dmax
++		#undef abs
++		#undef dabs
++		#undef bit_test
++		#undef bit_clear
++		#undef bit_set
++
++        // LAPACK function for calculating eigenvalues and eigenvectors (double precision)
++		void dsyev_(char *jobz, char *uplo, integer *n, doublereal *a, integer *lda, doublereal *w, doublereal *work, integer *lwork, integer *info);
++	}
+ #endif
+ 
+ namespace i3d
+@@ -317,7 +330,7 @@
+             }
+ 
+             // Symetric 4x4 matrix computed from cc
+-            double Q[4][4];
++            doublereal Q[4][4];
+             Q[0][0] = cc[0][0] + cc[1][1] + cc[2][2];
+             Q[1][0] = cc[1][2] - cc[2][1];
+             Q[2][0] = cc[2][0] - cc[0][2];
+@@ -333,9 +346,10 @@
+             Q[3][3] = -cc[0][0] - cc[1][1] + cc[2][2];
+ 
+             // Compute eigen values and eigen vectors of Q
+-            double ev[4], work[16];
+-            int info, dim = 4, lda = 4, lwork = 16;
+-            dsyev_("V", "U", &dim, (double *)Q, &lda, ev, work, &lwork, &info);
++            char jobz = 'V', uplo = 'U';
++            doublereal ev[4], work[16];
++            integer info, dim = 4, lda = 4, lwork = 16;
++            dsyev_(&jobz, &uplo, &dim, (doublereal *)Q, &lda, ev, work, &lwork, &info);
+ 
+             // Rotation quaternion is the last eigenvector (largest eigenvalue)
+             QuaternionToRotationMatrix(&Q[3][0], t);
