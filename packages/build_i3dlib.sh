@@ -17,6 +17,16 @@ change_cmake()
     return $? 
 }
 
+build_and_install()
+{
+    make -j8
+    if sudo -v; then
+        sudo make install
+    else
+        make install
+    fi
+}
+
 SSH_URL="git@gitlab.fi.muni.cz:cbia/I3DLIB.git"
 HTTPS_URL="https://gitlab.fi.muni.cz/cbia/I3DLIB.git"
 FOLDER="I3DLIB"
@@ -44,12 +54,10 @@ change_cmake ALGO_WITH_BLAS:BOOL ON
 change_cmake ALGO_WITH_LAPACK:BOOL ON
 change_cmake CORE_WITH_HDF5:BOOL OFF
 
-make -j8
-make install
+build_and_install
 
 change_cmake GLOBAL_BUILD_SHARED_LIBS:BOOL OFF
-make -j8
-make install
+build_and_install
 
 cd ..
 
