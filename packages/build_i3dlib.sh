@@ -21,6 +21,12 @@ SSH_URL="git@gitlab.fi.muni.cz:cbia/I3DLIB.git"
 HTTPS_URL="https://gitlab.fi.muni.cz/cbia/I3DLIB.git"
 FOLDER="I3DLIB"
 
+if sudo -v; then
+    INSTALL_DIR="/usr/local"
+else
+    INSTALL_DIR="${SOFTWARE_HOME}"
+fi
+
 git clone "${SSH_URL}" "${FOLDER}"
 cd "${FOLDER}"
 git checkout vcpkg_clean
