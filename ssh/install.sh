@@ -6,7 +6,9 @@ trap '__abort' 0
 
 mkdir -p "${HOME}/.ssh"
 
-if [ ! -f ssh/config ]; then
+if sudo -v; then
+    cp ssh/config_local ssh/config
+else
     cp ssh/config_remote ssh/config
 fi
 

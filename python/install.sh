@@ -5,9 +5,9 @@ source utils/src_init_shell.sh
 
 trap '__abort' 0
 
-URL="https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh"
+URL="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
 FILE="$(basename "$URL")"
-INSTALL_DIR="${HOME}/.anaconda3"
+INSTALL_DIR="${HOME}/.miniconda3"
 
 rm -rf "${INSTALL_DIR}" 
 
@@ -19,11 +19,11 @@ BIN="${INSTALL_DIR}/bin"
 eval "$("${BIN}/conda" shell.bash hook)"
 conda init $SHELL_NAME 
 conda config --set auto_activate_base false
+conda config --add channels conda-forge
 
 conda update -y -n base -c defaults conda
-rm "$FILE"
+conda create -n py311 python=3.11
 
-./python/rebuild_env.sh
-./python/build_napari.sh
+rm "$FILE"
 
 trap : 0

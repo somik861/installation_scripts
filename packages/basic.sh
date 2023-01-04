@@ -15,16 +15,13 @@ if [ "$APT" == "sudo apt" ]; then
     source utils/src_init_package_manager.sh
 fi
 
-UBUNTU_PKG="g++ gcc-12 g++-12 clang-format apt tar zip unzip curl build-essential zlib1g-dev libssl-dev libtool libtool-bin gettext openjdk-18-jdk maven network-manager-openvpn cmake-curses-gui libreoffice xclip nomacs gimp handbrake libhwloc-dev libevent-pthreads-2.1-7 git-gui doxygen-gui valgrind linux-tools-common linux-tools-generic smplayer npm dotnet6 bridge-utils cpu-checker libvirt-clients libvirt-daemon qemu-kvm virt-manager libvirt-daemon-system virtinst"
-ALL_PKG="git make perl gcc clang cmake tmux vim texlive-full net-tools wget vlc pkg-config htop ffmpeg mediainfo"
-ARCH_PKG="qbittorrent"
+BUILD_PKG="gcc g++ clang clang-format build-essential make pkg-config libtool libtool-bin valgrind openjdk-18-jdk maven linux-tools-common linux-tools-generic"
+UTILS_PKG="apt tar zip unzip curl git git-gui perl cmake cmake-curses-gui xclip doxygen-gui ffmpeg htop wget net-tools gettext netowrk-maanger-openvpn"
+LIBRARIES_PKG="zlib1g-dev libssl-dev"
+APPS_PKG="libreoffice nomacs gimp smplayer mediainfo handbrake vim tmux"
+VM_PKG="bridge-utils cpu-checker libvirt-clients libvirt-daemon qemu-kvm virt-manager libvirt-daemon-system virtinst"
+TEX_PKG="texlive-full"
 
-if [ "$APT" == "sudo apt" ] || [ "$APT" == "sudo nala" ]; then
-    $APT $INSTALL $ALL_PKG $UBUNTU_PKG
-    elif [ "$APT" == "sudo pacman" ]; then
-    $APT $INSTALL $ALL_PKG $ARCH_PKG
-else
-    __die Unknown distro package manager
-fi
+$APT $INSTALL $BUILD_PKG $UTILS_PKG $LIBRARIES_PKG $APPS_PKG $VM_PKG $TEX_PKG
 
 trap : 0
