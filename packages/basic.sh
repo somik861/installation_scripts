@@ -16,7 +16,7 @@ if [ "$APT" == "sudo apt" ]; then
 fi
 
 BUILD_PKG="gcc g++ clang clang-format build-essential make pkg-config libtool libtool-bin valgrind openjdk-18-jdk maven linux-tools-common linux-tools-generic"
-UTILS_PKG="apt tar zip unzip curl git git-gui perl cmake cmake-curses-gui xclip doxygen-gui ffmpeg htop wget net-tools gettext netowrk-maanger-openvpn"
+UTILS_PKG="apt tar zip unzip curl git git-gui perl cmake cmake-curses-gui xclip doxygen-gui ffmpeg htop wget net-tools gettext network-manager-openvpn"
 LIBRARIES_PKG="zlib1g-dev libssl-dev"
 APPS_PKG="libreoffice nomacs gimp smplayer mediainfo handbrake vim tmux"
 VM_PKG="bridge-utils cpu-checker libvirt-clients libvirt-daemon qemu-kvm virt-manager libvirt-daemon-system virtinst"

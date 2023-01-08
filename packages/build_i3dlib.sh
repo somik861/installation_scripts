@@ -48,7 +48,7 @@ patch src/RegistrationPointBased.cc ../packages/i3d_patches/RegistrationPointBas
 ## build
 mkdir build
 cd build
-cmake -DCMAKE_TOOLCHAIN_FILE=~/.vcpkg/scripts/buildsystems/vcpkg.cmake -DGLOBAL_INSTALL_PATH="${SOFTWARE_HOME}" ../
+cmake -DCMAKE_TOOLCHAIN_FILE=~/.vcpkg/scripts/buildsystems/vcpkg.cmake -DGLOBAL_INSTALL_PATH="${INSTALL_DIR}" ../
 
 change_cmake ALGO_WITH_BLAS:BOOL ON
 change_cmake ALGO_WITH_LAPACK:BOOL ON
