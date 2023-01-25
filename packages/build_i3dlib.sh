@@ -42,7 +42,7 @@ cd "${FOLDER}"
 git checkout vcpkg_clean
 
 ## apply patches
-patch src/diffusion_filters.cc ../packages/i3d_patches/diffusion_filters.cc.patch
+# Patched --> patch src/diffusion_filters.cc ../packages/i3d_patches/diffusion_filters.cc.patch
 patch src/RegistrationPointBased.cc ../packages/i3d_patches/RegistrationPointBased.cc.patch
 
 ## build
