@@ -322,24 +322,30 @@ make install
 # environment
 cat << EOF > "${install_dir}/activate"
 # source this script to bring gcc ${gcc_version} into your environment
-export PATH="${install_dir}/bin:\$PATH"
-export LD_LIBRARY_PATH="${install_dir}/lib:${install_dir}/lib64:\$LD_LIBRARY_PATH"
-export MANPATH="${install_dir}/share/man:\$MANPATH"
-export INFOPATH="${install_dir}/share/info:\$INFOPATH"
+
+__TMP_PATH=\$(pwd)
+export PATH="\${__TMP_PATH}/bin:\$PATH"
+export LD_LIBRARY_PATH="\${__TMP_PATH}/lib:\${__TMP_PATH}/lib64:\$LD_LIBRARY_PATH"
+export MANPATH="\${__TMP_PATH}/share/man:\$MANPATH"
+export INFOPATH="\${__TMP_PATH}/share/info:\$INFOPATH"
 
 export CC="\$(which gcc)"
 export CXX="\$(which g++)"
+unset __TMP_PATH
 EOF
 
 cat << EOF > "${install_dir}/deactivate"
 # source this script to remove gcc ${gcc_version} from your environment
-export PATH=\`echo \$PATH | sed "s~${install_dir}/bin:~~g"\`
-export LD_LIBRARY_PATH=\`echo \$LD_LIBRARY_PATH | sed "s~${install_dir}/lib:${install_dir}/lib64:~~g"\`
-export MANPATH=\`echo \$MANPATH | sed "s~${install_dir}/share/man:~~g"\`
-export INFOPATH=\` echo \$INFOPATH | sed "s~${install_dir}/share/info:~~g"\`
+
+__TMP_PATH=\$(pwd)
+export PATH=\`echo \$PATH | sed "s~\${__TMP_PATH}/bin:~~g"\`
+export LD_LIBRARY_PATH=\`echo \$LD_LIBRARY_PATH | sed "s~\${__TMP_PATH}/lib:\${__TMP_PATH}/lib64:~~g"\`
+export MANPATH=\`echo \$MANPATH | sed "s~\${__TMP_PATH}/share/man:~~g"\`
+export INFOPATH=\` echo \$INFOPATH | sed "s~\${__TMP_PATH}/share/info:~~g"\`
 
 export CC="\$(which gcc)"
 export CXX="\$(which g++)"
+unset __TMP_PATH
 EOF
 
 #======================================================================
